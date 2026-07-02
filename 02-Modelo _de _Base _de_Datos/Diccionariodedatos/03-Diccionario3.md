@@ -39,12 +39,12 @@ Permite gestionar el proceso de inscripción escolar y el historial académico, 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| id_alumno| INT | - | NN, AI, PK |Identificador del alumno|
-| matricula |VARCHAR| 10 | NN |Clave de control del alumno |
-| nombre | NVARCHAR |  30|  NN| Nombre del estudiante |
-| apellido_1| NVARCHAR| 20 | NN | Apellido paterno |
-| apellido_2| NVARCHAR| 20 | NULL | Apellido materno |
-| semestre| INT| - | NN, CK(>0) | Semestre que cursa el alumno |
+| IdAlumno| INT | - | NN, AI, PK |Identificador del alumno|
+| Matricula |VARCHAR| 10 | NN |Clave de control del alumno |
+| Nombre | NVARCHAR |  30|  NN| Nombre del estudiante |
+| Apellido1| NVARCHAR| 20 | NN | Apellido paterno |
+| Apellido2| NVARCHAR| 20 | NULL | Apellido materno |
+| Semestre| INT| - | NN, CK(>0) | Semestre que cursa el alumno |
 
 -----
 
@@ -54,9 +54,9 @@ Permite gestionar el proceso de inscripción escolar y el historial académico, 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| id_materia| INT | - | NN, AI, PK |Identificador único de la materia|
-| nombre |VARCHAR| 20| NN, UQ| Nombre de la asignatura |
-| creditos |INT| -| NN, CK(>0)| Nombre de la asignatura |
+| IdMateria| INT | - | PK, AI, NN |Identificador único de la materia|
+| Nombre |VARCHAR| 20| NN, UQ| Nombre de la asignatura |
+| Creditos |INT| -| NN, CK(>0)| Nombre de la asignatura |
 
 -----
 
@@ -66,9 +66,10 @@ Permite gestionar el proceso de inscripción escolar y el historial académico, 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| id_materia| INT | - | NN, FK|Referencia a la materia cursada|
-| fecha_inscripcion |DATE| -| NN| Fecha en la que se realizó la inscripción |
-| cali_final |DECIMAL| -| NN, CK(>0)|Nota obtenida por el alumno|
+| IdMateria| INT | - | PK, NN, FK|Referencia a la materia cursada|
+| IdAlumno |INT|-|PK, NN,FK| Referencia a los datos de los alumos|
+| FechaInscripcion |DATE| -| NN| Fecha en la que se realizó la inscripción |
+| CaliFinal |DECIMAL| -| NN, CK(>0)|Nota obtenida por el alumno del (0-10)|
 
 
 
@@ -85,8 +86,8 @@ Permite gestionar el proceso de inscripción escolar y el historial académico, 
 
   Tabla | Campo FK | Referencia |
 |:----------|:---------:|----------:|
-|Inscribe| id_alumno  | Alumno (id_alumno)  |
-|Inscribe| id_materia  | Materia (id_materia)  |
+|Inscribe| IdAlumno  | Alumno (IdAlumno)  |
+|Inscribe| IdMateria  | Materia (IdMateria)  |
 
 
 7. Integridad referencial 
@@ -112,6 +113,5 @@ Permite gestionar el proceso de inscripción escolar y el historial académico, 
 
 9. Diagrama relacional    
 
-[Eje3](/image/Relacional/TabE3.jpg)
-
+![Eje3](/image/Relacional/EjercicioTab3.jpg)
 

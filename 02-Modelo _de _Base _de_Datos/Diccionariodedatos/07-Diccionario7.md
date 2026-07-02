@@ -56,7 +56,7 @@ El sistema gestiona de manera integral la información académica y administrati
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
 | ClaveMateria | INT | - | PK, NN | Clave de la asignatura |
-| NombreMateria| NVARCHAR | 50 | NN | Nombre de la materia |
+| NombreMateria| NVARCHAR | 50 | UQ, NN | Nombre de la materia |
 | Creditos | INT | - | NN | Créditos otorgados |
 | NumProf | INT | - | FK | Profesor responsable |
 
@@ -66,10 +66,10 @@ El sistema gestiona de manera integral la información académica y administrati
 **Descripción:** Tabla asociativa que vincula alumnos con materias.
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Matricula | VARCHAR | 20 | FK, PK | Referencia al alumno |
-| ClaveMateria | INT | - | FK, PK | Referencia a la materia |
+| Matricula | VARCHAR | 20 | FK, PK, NN | Referencia al alumno |
+| ClaveMateria | INT | - | FK, PK, NN| Referencia a la materia |
 | Fechainscrip | DATE | - | NN | Fecha de inscripción |
-| Calificacionfinal| DECIMAL| - | - | Nota final del curso |
+| Calificacionfinal| DECIMAL| - | NN | Nota final del curso |
 
 ----
 
@@ -80,8 +80,8 @@ El sistema gestiona de manera integral la información académica y administrati
 | Numprof | INT | - | PK, NN | Identificador del profesor |
 | Nombre | NVARCHAR | 50 | NN | Nombre del profesor |
 | Apellido1 | NVARCHAR | 50 | NN | Apellido paterno |
-| Apellido2 | NVARCHAR | 50 | - | Apellido materno |
-| NumDepFK | INT | - | FK | Departamento asociado |
+| Apellido2 | NVARCHAR | 50 | NULL | Apellido materno |
+| NumDepFK | INT | - | FK,NN | Departamento asociado |
 
 ----
 
@@ -91,7 +91,7 @@ El sistema gestiona de manera integral la información académica y administrati
 | :--- | :--- | :--- | :--- | :--- |
 | NumProyecto | INT | - | PK, NN | Identificador del proyecto |
 | Nombre | NVARCHAR | 50 | NN | Nombre del proyecto |
-| Presupuesto | MONEY | - | - | Recursos asignados |
+| Presupuesta | MONEY | - | NN, CK(>0) | Recursos asignados |
 
 ----
 
@@ -99,8 +99,9 @@ El sistema gestiona de manera integral la información académica y administrati
 **Descripción:** Registro de participación de profesores en proyectos.
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| NumprofFK | INT | - | FK, PK | ID del profesor |
-| NumproyFK | INT | - | FK, PK | ID del proyecto |
+| Numprof | INT | - | PK, FK | ID del profesor |
+| NumproyFK | INT | - | PK, FK| ID del proyecto |
+| FechaInscripcion | DATE | - | NN| ID del proyecto |
 | Rol | NVARCHAR | 30 | NN | Función en el proyecto |
 
 ----
@@ -130,7 +131,7 @@ El sistema gestiona de manera integral la información académica y administrati
 **Descripción:** Registro de participación de profesores en proyectos.
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| NumDep| INT | - | PK, NN| Número del departamento |
+| NumDepaar| INT | - | PK, NN| Número del departamento |
 | NombreDep | NVARCHAR | 30 |NN | Nombre del departamento |
 | Edificio |NVARCHAR| - |NN |Nombre del edicicio deonde se encuentra|
 
@@ -142,18 +143,24 @@ El sistema gestiona de manera integral la información académica y administrati
 | :--- | :--- | :--- | :--- | :--- |
 | NombreDepend| NVARCHAR | 30 | PK, NN| Nombre del dependiente|
 | NumProfesor | INT | - |NN | ID del Profesor |
-| Fechanaci | DATE | - | - | Fecha de nacimiento |
-| Parentezco | NVARCHAR | 30 | - | El parentezco que tiene con el profesor |
+| Fechanaci | DATE | - | NN | Fecha de nacimiento |
+| Parentesco | NVARCHAR | 30 | NN | El parentezco que tiene con el profesor |
 
 
 5. Relaciones 
 
 | Relación | Cardinalidad | Descripción |
 | :--- | :---: | :--- |
-| Alumno <-> Curso | 1:N | Un alumno inscrito en varios cursos. |
-| Materia -> Curso | 1:N | Una materia presente en varios cursos. |
-| Profesor -> Departamento | N:1 | Un profesor pertenece a un departamento. |
-| Profesor <-> Proyecto | N:N | Resuelta por la tabla Participa. |
+|Alumno -> Credeciales|1:1|Un alumno tiene una sola credencial vigente.|
+|Telefono -> Alumno  |N:1|Un alumno puede tener varios números de teléfono.|
+|Alumno -> Curso|1:N|Un alumno puede estar inscrito en varios cursos.|
+|Materia ->Curso |1:N| Una materia puede ser impartida en varios cursos (instancias de inscripción).|
+|Materia -> Profesor|N:1|Una materia es impartida por un profesor responsable.|
+|Profesor -> Departamento|N:1|Un profesor pertenece a un único departamento.|
+|Profesor -> Dependiente|1:N|Un profesor puede tener varios dependientes.|
+|Profesor -> Participa|1:N|Un profesor puede participar en varios proyectos.|
+|Participa -> Proyecto|1:N|Un proyecto puede tener varios profesores participando.|
+
 
 6. Matriz de Claves Foráneas
 
@@ -161,9 +168,10 @@ El sistema gestiona de manera integral la información académica y administrati
 | :--- | :--- | :--- |
 | Curso | Matricula | Alumno(Matricula) |
 | Curso | ClaveMateria | Materia(ClaveMateria) |
-| Materia | NumProf | Profesor(Numprof) |
-| Participa | NumprofFK | Profesor(Numprof) |
-| Participa | NumproyFK | Proyecto(NumProyecto) |
+| Materia | NumProf | Profesor(NumProf) |
+| Participa | Numprof | Profesor(NumProf) |
+| Participa | Numproy | Proyecto(NumProyecto) |
+| Dependiente | Numprof | Profesor(NumProf) |
 
 7. Integridad referencial 
 
@@ -184,4 +192,4 @@ El sistema gestiona de manera integral la información académica y administrati
 
 9. Diagrama relacional    
 
-[Eje7](/image/Relacional/Tab7Credenciales.jpg)
+![Eje7](/image/Relacional/EjerciTab7.jpg)

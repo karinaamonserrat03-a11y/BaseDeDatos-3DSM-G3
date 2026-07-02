@@ -41,14 +41,14 @@ Permite controlar la estructura organizacional de la empresa, la asignación de 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Ssn | INT | - | PK, AI, NN | Identificador unico del employee |
+| Ssn | INT | - | PK, NN | Identificador unico del employee |
 | Firstname | NVARCHAR| 50 | NN | Nombre del empleado |
 | Lastname | VARCHAR| 50 | NN | Apellido paterno |
 | Birthday | DATE| -| NN | Fecha de naciemiento |
 | Salary | MONEY| -| NN CK(>0)| Salario que gana el empleado |
-| Address | NVARCHAR| 50 | NN| Salario que gana el empleado |
+| Address | NVARCHAR| 50 | NN| Direccion del empleado |
 | Sex | CHAR | -| NN|Sexo del empleado |
-| Jef | INT | -| NN, FK| ID del jefe |
+| Jef | INT | -| FK, NULL| ID del jefe |
 
 
 -----
@@ -60,9 +60,9 @@ Permite controlar la estructura organizacional de la empresa, la asignación de 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Numer | INT | - | PK, NN | Identificador unico del departamento |
+| Number | INT | - | PK, NN | Identificador unico del departamento |
 | Name | NVARCHAR  | 30| NN |  Nombre del departamento |
-| Manager| INT  | - | NN, FK | Llave foranea del jefe |
+| Manager| INT  | - |FK, NN | Llave foranea del jefe |
 | Stardate | DATE  | - |NN| Fecha de cuando inaguraron el departamento |
 | Ssn | INT  | - | FK, NN | Identificador del empleado |
 
@@ -74,23 +74,23 @@ Permite controlar la estructura organizacional de la empresa, la asignación de 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Number | INT  | - | NN, PK | Numero del proyecto|
-| Name | NVARCHART |30| NN | Nombre del proyecto |
+| NumberProye | INT  | - | PK, NN | Numero del proyecto|
+| NameProyec | NVARCHART |30|PK, NN | Nombre del proyecto |
 | Location | NVARCHAR  |30| NN | Dirección del proyecto |
 | NumberDep | INT  | - | FK, NN | Identificador del departamento |
-| NameDeo | NVARCHAR  | - | FK, NN, UQ | Nombre del departamento|
+| NameDep | NVARCHAR  | - | FK, NN | Nombre del departamento|
 
 -----
 
-**Tabla:** Work on          
+**Tabla:** WorkOn          
 
 **Descripción:**__Tabla asociativa que registra la participación del empleado en proyectos__
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Ssn | INT | - | PK,FK, NN | Identificador unico del empleado|
-| NameProy | NVARCHAR  | 30 | NN,FK,PK | Nombre del proyecto |
-| NumberProy | INT  |- | NN |Número del proyecto |
+| Ssn | INT | - |PK, FK, NN | Identificador unico del empleado|
+| NameProy | NVARCHAR  | 30 | PK,FK, NN | Nombre del proyecto |
+| NumberProy | INT  |- | PK,FK,NN |Número del proyecto |
 | Hours | DECIMAL  | - | NN | Cantidad de horas trabajadas en el proyecto |
 
 -----
@@ -102,10 +102,10 @@ Permite controlar la estructura organizacional de la empresa, la asignación de 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
 | Ssn | INT | - | PK, FK,  NN | Identificador unico del empleado |
-| Name | NVARCHART  | 30 | NN, PK | Nombre del dependiente |
+| Name | NVARCHART  | 30 | PK, NN | Nombre del dependiente |
 | Sex | CHAR  | 5 | NN | Sexo de la persona |
-| RelationShip | NVARCHAR  | 30 | NN|Relación que tiene con el empleado |
-| Birthday | DATE| -| NN | Fecha de naciemiento |
+| Relationship | NVARCHAR  | 30 | NN|Relación que tiene con el empleado |
+| Birthdate | DATE| -| NN | Fecha de naciemiento |
 
 
 
@@ -117,9 +117,9 @@ Permite controlar la estructura organizacional de la empresa, la asignación de 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Numlocation | INT | - | PK, NN | Identificador unico de la localización |
-| NumberDep | INT  | - | NN, FK | Número del departamento|
-| NameDep | NVARCHAR  | 30 | NN | Nombre del departamento |
+| NumLocation | INT | - | PK, NN | Identificador unico de la localización |
+| NumDep | INT  | - | FK,NN | Número del departamento|
+| NameDep | NVARCHAR  | 30 | FK,NN| Nombre del departamento |
 | Location | NVARCHAR  | - | NN | Localización del departamento |
 
 
@@ -139,9 +139,9 @@ Permite controlar la estructura organizacional de la empresa, la asignación de 
   Tabla | Campo FK | Referencia |
 |:----------|:---------:|----------:|
 |Employee| Jef  | Employee (Ssn)  |
-|Departament| SsnFK  | Employee (Ssn)  |
-|Work On| SsnFK  | Employee (Ssn)  |
-|Work On| NumberProy  | Proyect (NumberProy)  |
+|Departament| Ssn | Employee (Ssn)  |
+|Proyect|   NumberDep  | Departament (Number)  |
+|WorkOn| Ssn | Employee (Ssn)  |
 |Dependet| Ssn  | Employee (Ssn)  |
 
 
@@ -165,7 +165,7 @@ Permite controlar la estructura organizacional de la empresa, la asignación de 
 
 9. Diagrama relacional    
 
-[Eje5](/image/Relacional/Tab5Ingles.jpg)
+![Eje5](/image/Relacional/EjercicioTab5.jpg)
 
  
 

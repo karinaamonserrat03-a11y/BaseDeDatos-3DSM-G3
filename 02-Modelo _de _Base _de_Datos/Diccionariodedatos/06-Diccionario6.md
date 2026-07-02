@@ -35,7 +35,7 @@ El sistema administra la estructura organizacional de la empresa, incluyendo emp
 
 ## 4. Dirección de Datos
 
-### Tabla: Employee
+**Tabla**: Employee
 **Descripción:** Almacena toda la información del personal, incluyendo sus jerarquías.
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
@@ -47,59 +47,59 @@ El sistema administra la estructura organizacional de la empresa, incluyendo emp
 | Salary | MONEY | - | NN, CK(>0) | Salario que gana el empleado |
 | Address | NVARCHAR | 50 | NN | Dirección del empleado |
 | Sex | CHAR | - | NN | Sexo del empleado |
-| Jef | INT | - | NN, FK | ID del jefe |
+| Jef | INT | - | FK | ID del jefe |
 
-### Tabla: Departament
+**Tabla**: Departament
 **Descripción:** Define las unidades operativas y quién las dirige.
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Numer | INT | - | PK, NN | Identificador único del departamento |
+| NumberDep | INT | - | PK, NN | Identificador único del departamento |
 | Name | NVARCHAR | 30 | NN | Nombre del departamento |
-| Manager | INT | - | NN, FK | Llave foránea del jefe |
+| Manages | INT | - | NN | Llave foránea del jefe |
 | Stardate | DATE | - | NN | Fecha de inauguración del departamento |
-| Ssn | INT | - | FK, NN | Identificador del empleado |
 
-### Tabla: Proyect
+
+**Tabla**: Project
 **Descripción:** Catálogo de proyectos y el departamento que los gestiona.
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Number | INT | - | NN, PK | Número del proyecto |
+| Number | INT | - | PK, NN | Número del proyecto |
 | Name | NVARCHAR | 30 | NN | Nombre del proyecto |
 | Location | NVARCHAR | 30 | NN | Dirección del proyecto |
 | NumberDep | INT | - | FK, NN | Identificador del departamento |
-| NameDeo | NVARCHAR | - | FK, NN, UQ | Nombre del departamento |
+|
 
-### Tabla: Work on
+**Tabla**: Work_On
 **Descripción:** Tabla asociativa que registra la participación del empleado en proyectos.
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Ssn | INT | - | PK, FK, NN | Identificador único del empleado |
-| NameProy | NVARCHAR | 30 | NN, FK, PK | Nombre del proyecto |
-| NumberProy | INT | - | NN | Número del proyecto |
+| Id_work | INT | - |FK, NN | Identificador único del empleado |
+| Ssn | VARCHAR | 20 |  FK,NN| Nombre del proyecto |
+| NumberProy| INT | - | NN | Número del proyecto |
 | Hours | DECIMAL | - | NN | Cantidad de horas trabajadas |
 
-### Tabla: Dependet
+**Tabla**: Dependet
 **Descripción:** Información sobre los beneficiarios o familiares del empleado.
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Ssn | INT | - | PK, FK, NN | Identificador único del empleado |
-| Name | NVARCHAR | 30 | NN, PK | Nombre del dependiente |
+| id_dependet | INT | - | PK, NN | Identificador único del empleado |
+| Name | NVARCHAR | 30 | NN | Nombre del dependiente |
 | Sex | CHAR | 5 | NN | Sexo de la persona |
 | RelationShip| NVARCHAR | 30 | NN | Relación con el empleado |
 | Birthday | DATE | - | NN | Fecha de nacimiento |
+| Ssn | VARCHAR | 50 | FK,NN | ID del empelado|
 
-### Tabla: Location
+**Tabla**: Location
 **Descripción:** Detalla las ubicaciones físicas vinculadas a los departamentos.
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Numlocation | INT | - | PK, NN | Identificador único de la localización |
+| id_location | INT | - | PK, NN | Identificador único de la localización |
 | NumberDep | INT | - | NN, FK | Número del departamento |
-| NameDep | NVARCHAR | 30 | NN | Nombre del departamento |
 | Location | NVARCHAR | - | NN | Localización del departamento |
 
 ## 5. Relaciones 
@@ -117,10 +117,12 @@ El sistema administra la estructura organizacional de la empresa, incluyendo emp
 | Tabla | Campo FK | Referencia |
 | :--- | :--- | :--- |
 | Employee | Jef | Employee (Ssn) |
-| Departament | Ssn | Employee (Ssn) |
+| Departament | Manages | Employee (Ssn) |
+| Project | NumberDep | Departament (NumberDep) |
 | Work On | Ssn | Employee (Ssn) |
 | Work On | NumberProy | Proyect (Number) |
 | Dependet | Ssn | Employee (Ssn) |
+| Location | NumbeDep | Departament(NumbeDep) |
 
 ## 7. Integridad referencial 
 
@@ -141,4 +143,4 @@ El sistema administra la estructura organizacional de la empresa, incluyendo emp
 
 9. Diagrama relacional    
 
-[Eje6](/image/Relacional/Tab6Ingles.jpg)
+[Eje6](/image/Relacional/EjecicioTab6.jpg)

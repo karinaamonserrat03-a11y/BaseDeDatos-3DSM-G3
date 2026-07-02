@@ -4,7 +4,7 @@
 
 | Elemento |  Valor |
 | :--- | :--- |
-| Proyecto | Sistema de Control Escolar |
+| Proyecto | Sistema de Control Hospitalario |
 | Versión | 1.0 |
 | Fecha | 28 de Junio 2026 |
 | Elaboró  | Karina Monserrat Ruiz Ortega |
@@ -39,11 +39,11 @@ Permite controlar la identifcación del paciente y garantizar la vinculación pe
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| num_paciente | INT | - | PK, AI, NN | Identificador unico del paciente |
-| nombre | VARCHAR| 100 | UQ, NN | Nombre del paciente |
-| apellido_1 | VARCHAR| 50 | NN | Apellido paterno |
-| apellido_2 | VARCHAR| 50 | NULL | Apellido materno |
-| fecha_naci | DATE| -| NN | Fecha de naciemiento |
+| NumPaciente | INT | - | PK, AI, NN | Identificador unico del paciente |
+| Nombre | VARCHAR| 100 | NN | Nombre del paciente |
+| Apellido1 | VARCHAR| 50 | NN | Apellido paterno |
+| Apellido2 | VARCHAR| 50 | NULL | Apellido materno |
+| Birthdate | DATE| -| NN | Fecha de naciemiento |
 
 
 -----
@@ -55,25 +55,25 @@ Permite controlar la identifcación del paciente y garantizar la vinculación pe
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| num_expediemte | INT | - | PK, AI, NN | Identificador unico del alumno |
-| fecha_apertura | DATE  | - | NN | Fecha de creación del expediente |
-| tipo_de_sangre | VARCHAR  | 5 | NN | Grupo sanguíneo y factor RH |
-| Num_paciente | INT  | - | FK, NN, UQ | Identificador del paciente |
+| NumExpediente | INT | - | PK, AI, NN | Identificador unico del alumno |
+| FechaApertura | DATE  | - | NN | Fecha de creación del expediente |
+| TipoSangre | VARCHAR  | 5 | NN | Grupo sanguíneo y factor RH |
+| NumPaciente | INT  | - | FK, NN, UQ | Identificador del paciente |
 
 
 5. Relaciones 
 
 |  Relación | Cardinalidad | Descripción |
 |:----------|:---------:|----------:|
-| Paciente -> Expediente    | 1:1   | Cada paciente debe tener un único expediente médico asignado. |
-| Expediente -> Paciente    | 1:1   | Cada expediente médico pertenece a un único paciente. |
+| Paciente -> Expediente    | 1:1   | Cada paciente debe tener un único expediente médico asignado|
+
 
 
 6. Matriz de Claves Foráneas
 
   Tabla | Campo FK | Referencia |
 |:----------|:---------:|----------:|
-|Expediente| num_paciente  | Paciente (num_paciente)  |
+|Expediente| NumPaciente  | Paciente (NumPaciente)  |
 
 
 7. Integridad referencial 
@@ -95,7 +95,7 @@ Permite controlar la identifcación del paciente y garantizar la vinculación pe
 
 9. Diagrama relacional    
 
-[Eje1](/image/Relacional/Tab1.jpg)
+![Eje1](/image/Relacional/EjercicioTab1.jpg)
 
  
 

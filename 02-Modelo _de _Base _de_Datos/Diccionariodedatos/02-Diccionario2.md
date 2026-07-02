@@ -39,10 +39,10 @@ Permite controlar la carga académica de los docentes y la asignación eficiente
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| id_profesor | INT | - | PK, AI, NN | Identificador unico del profesor |
-| nombre | NVARCHAR| 100 |  NN | Nombre del profesor |
-| apellido_1 | NVARCHAR| 20 | NN | Apellido paterno |
-| apellido_2 | NVARCHAR| 20 | NULL | Apellido materno |
+| NumProfesor | INT | - | PK, AI, NN | Identificador unico del profesor |
+| Nombre | NVARCHAR| 100 |  NN | Nombre del profesor |
+| Apellido1 | NVARCHAR| 20 | NN | Apellido paterno |
+| Apellido2 | NVARCHAR| 20 | NULL | Apellido materno |
 
 
 
@@ -53,10 +53,10 @@ Permite controlar la carga académica de los docentes y la asignación eficiente
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| id_curso | INT | - | PK, AI, NN | Identificador unico del curso |
-| nombre_curso | NVARCHAR  | 20 | UQ, NN | Nombre de l curso |
-| creditos | INT  | -| NN, CK(>0)| Creditos del curso |
-| id_profesor | INT  | - | FK, NN | Profesor que imparte el curso |
+| Numcurso | INT | - | PK, AI, NN | Identificador unico del curso |
+| NombreCurso | NVARCHAR  | 20 | UQ, NN | Nombre de l curso |
+| Creditos | INT  | -| NN, CK(>0)| Creditos del curso |
+| NumProfesor | INT  | - | FK, NN | Profesor que imparte el curso |
 
 -----
 
@@ -65,27 +65,26 @@ Permite controlar la carga académica de los docentes y la asignación eficiente
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| num_especialidad | INT | -| PK, AI, NN | Identificador unico de la especialidad |
-| nom_especialidad| NVARCHAR  | 30 | UQ, NN | Nombre de la especialidad |
-| num_profesor| INT  | - | NN, FK| Profesor al que pertenece esta especialidad|
+| NumEspecialidad | INT | -| PK, AI, NN | Identificador unico de la especialidad |
+| NumProfesor| INT  | - | NN, FK| Profesor al que pertenece esta especialidad|
+|NombreEspecialidad| NVARCHAR  | 30 | UQ, NN | Nombre de la especialidad |
+
 
 
 5. Relaciones 
 
 |  Relación | Cardinalidad | Descripción |
 |:----------|:---------:|----------:|
-| Profesor -> Curso    | 1:N | Un profesor puede impartir varios curso |
-| Curso -> Profesor    | N:1  | Cada curso es impartido por un único profesor. |
-| Profesor -> Especialidad    | 1:N | Un profesor puede tener registradas varias especialidades|
-| Especialidad -> Profesor    | N:1  |Cada especialidad está asociada a un profesor en específico|
+| Profesor -> Curso    | 1:N |  Un profesor puede impartir varios cursos. Cada curso es impartido por un único profesor|
+| Profesor -> Especialidad    | 1:N |Un profesor puede tener varias especialidades. Cada especialidad está asociada a un único profesor.|
 
 
 6. Matriz de Claves Foráneas
 
   Tabla | Campo FK | Referencia |
 |:----------|:---------:|----------:|
-|Curso| num_prof  | Profesor (num_prof)  |
-|Especialidad| num_prof  | Profesor (num_prof)  |
+|Curso| Numprofesor | Profesor (NumProfesor)  |
+|Especialidad| NumProfesor  | Profesor (Numprofesor)  |
 
 
 7. Integridad referencial 
@@ -109,7 +108,7 @@ Permite controlar la carga académica de los docentes y la asignación eficiente
 
 9. Diagrama relacional    
 
-[Eje2](/image/Relacional/Tab2.jpg)
+![Eje2](/image/Relacional/EjercicioTab2.jpg)
 
  
 

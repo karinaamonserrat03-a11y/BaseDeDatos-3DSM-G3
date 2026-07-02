@@ -32,9 +32,9 @@
 ## Ejercicos 5 
 (Ingles Vers 1)
 ### Solución del Ejercicio 
-[Ejercicio Eje5](/image/ER/Ejer5Ingles.jpg)
+[Ejercicio Eje5]()
 ##### Mapeo E-R Relacional 
-[Ejercicio Eje5](/image/Relacional/Tab5Ingles.jpg)
+[Ejercicio Eje5]()
 
 ----
 ## Ejercicos 6
@@ -49,6 +49,5 @@
 ### Solución del Ejercicio 
 [Ejercicio Eje7]()
 ##### Mapeo E-R Relacional 
-[Ejercicio Eje7 ](/image/Relacional/Tab7Credenciales.jpg)
+[Ejercicio Eje7 ]()
 
-diccionario de datos 

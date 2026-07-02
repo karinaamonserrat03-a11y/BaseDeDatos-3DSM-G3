@@ -4,7 +4,7 @@
 
 | Elemento |  Valor |
 | :--- | :--- |
-| Proyecto | Sistema de Control Escolar |
+| Proyecto | Sistema de Control de Ventas |
 | Versión | 1.0 |
 | Fecha | 28 de Junio 2026 |
 | Elaboró  | Karina Monserrat Ruiz Ortega |
@@ -40,11 +40,11 @@ Permite gestionar el ciclo de ventas al por mayor, garantizando la trazabilidad 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| id_cliente| INT | - | NN,  PK |Identificador del cliente|
-| nombre | NVARCHAR | 50 |  NN| Nombre del cliente|
-| apellido_1| NVARCHAR| 30 | NN | Apellido paterno |
-| apellido_2| NVARCHAR| 20 | NULL | Apellido materno |
-| fecha_naci| DATE| - | NN | Fecha de nacimiento|
+| IdCliente| INT | - |PK,NN |Identificador del cliente|
+| Nombre | NVARCHAR | 50 |  NN| Nombre del cliente|
+| Apellido1| NVARCHAR| 30 | NN | Apellido paterno |
+| Apellido2| NVARCHAR| 20 | NULL | Apellido materno |
+| FechaNaci| DATE| - | NN |  Fecha de nacimiento |
 
 -----
 
@@ -54,9 +54,9 @@ Permite gestionar el ciclo de ventas al por mayor, garantizando la trazabilidad 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| num_pedido| INT | - | NN, PK |Identificador único del pedido|
-| fecha_pedido |DATE| -| NN| Fecha del pedido|
-| id_cliente |INT| -| NN, FK| Cliente que realiza el pedido |
+| NumPedido| INT | - | PK,NN |Identificador único del pedido|
+| FechaPedido |DATE| -| NN| Fecha del pedido|
+| IdCliente |INT| -| FK, NN| Cliente que realiza el pedido |
 
 -----
 
@@ -66,22 +66,22 @@ Permite gestionar el ciclo de ventas al por mayor, garantizando la trazabilidad 
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| numero_producto| INT | - | NN, PK| Identidficador del producto|
-| nombre_producto |NVARCHAR| 30 | NN| Nombre del producto |
-| precio_producto |MONEY| -| NN, CK(>0)|Precio del producto|
+| NumProducto| INT | - | PK, NN| Identidficador del producto|
+| NombreProducto |NVARCHAR| 30 | NN| Nombre del producto |
+| PrecioProducto |MONEY| -| NN, CK(>0)|Precio del producto|
 
 -----
 
-**Tabla:** Detalle_del_Pedido
+**Tabla:** DetallePedido
 
 **Descripción:**__Almacena la cantidad exacta vendida y congelar el precio de venta al momento de la transacción, asegurando que el histórico de ventas no se vea afectado por futuros cambios en los precios del catálogo__
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| numero_pedido| INT | - | NN, PK, FK| Relación con el pedido|
-| numero_producto |INT| - | PK, FK| Relación con el producto |
-| cantidad_venta |INT| -| NN, CK(>0)|Unidades vendidad|
-| precio_venta |MONEY| -| NN, CK(>0)|Precio de venta|
+| NumPedido| INT | - |PK, FK, NN| Relación con el pedido|
+| NumeroProducto |INT| - | PK, FK, NN| Relación con el producto |
+| CantVenta |INT| -| NN, CK(>0)|Unidades vendidad|
+| PrecioVenta |MONEY| -| NN, CK(>0)|Precio de venta en el momento|
 
 
 5. Relaciones 
@@ -89,8 +89,8 @@ Permite gestionar el ciclo de ventas al por mayor, garantizando la trazabilidad 
 |  Relación | Cardinalidad | Descripción |
 |:----------|:---------:|----------:|
 | Cliente -> Pedido    | 1:N |Un cliente puede realizar muchos pedidos|
-| Pedido -> Detalle_del_Pedido   | 1:N | Un pedido puede tener varios detalles|
-| Producto -> Detalle_del_Pedido   | 1:N |Un producto puede estar en muchos detalles de pedido|
+| Pedido -> DetallePedido   | 1:N | Un pedido puede tener varios detalles|
+| Producto -> DetallePedido   | 1:N |Un producto puede estar en muchos detalles de pedido|
 
 
 
@@ -98,9 +98,9 @@ Permite gestionar el ciclo de ventas al por mayor, garantizando la trazabilidad 
 
   Tabla | Campo FK | Referencia |
 |:----------|:---------:|----------:|
-|Pedido | id_cliente | Cliente (id_cliente)  |
-|Detalle_del_Pedido | numero_pedido | Pedido (numero_pedido)  |
-|Detalle_del_Pedido | numero_producto  | Pedido (numero_producto)  |
+|Pedido | IdCliente | Cliente (IdCliente)  |
+|DetallePedido | NumPedido | Pedido (NumPedido)  |
+|DetallePedido | NumProducto  | Producto (NumProducto)  |
 
 
 7. Integridad referencial 
@@ -128,5 +128,5 @@ Permite gestionar el ciclo de ventas al por mayor, garantizando la trazabilidad 
    
 9. Diagrama relacional    
 
-[Eje4](/image/Relacional/Tab4.jpg)
+![Eje4](/image/Relacional/EjercicioTab4.jpg)
 
