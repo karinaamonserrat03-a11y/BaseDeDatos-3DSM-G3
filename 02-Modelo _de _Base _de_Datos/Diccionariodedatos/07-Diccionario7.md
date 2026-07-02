@@ -81,7 +81,7 @@ El sistema gestiona de manera integral la información académica y administrati
 | Nombre | NVARCHAR | 50 | NN | Nombre del profesor |
 | Apellido1 | NVARCHAR | 50 | NN | Apellido paterno |
 | Apellido2 | NVARCHAR | 50 | NULL | Apellido materno |
-| NumDepFK | INT | - | FK,NN | Departamento asociado |
+| NumDep | INT | - | FK,NN | Departamento asociado |
 
 ----
 
@@ -91,7 +91,7 @@ El sistema gestiona de manera integral la información académica y administrati
 | :--- | :--- | :--- | :--- | :--- |
 | NumProyecto | INT | - | PK, NN | Identificador del proyecto |
 | Nombre | NVARCHAR | 50 | NN | Nombre del proyecto |
-| Presupuesta | MONEY | - | NN, CK(>0) | Recursos asignados |
+| Presupuesto | MONEY | - | NN, CK(>0) | Recursos asignados |
 
 ----
 
@@ -100,8 +100,7 @@ El sistema gestiona de manera integral la información académica y administrati
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
 | Numprof | INT | - | PK, FK | ID del profesor |
-| NumproyFK | INT | - | PK, FK| ID del proyecto |
-| FechaInscripcion | DATE | - | NN| ID del proyecto |
+| Numproy| INT | - | PK, FK| ID del proyecto |
 | Rol | NVARCHAR | 30 | NN | Función en el proyecto |
 
 ----
@@ -111,8 +110,9 @@ El sistema gestiona de manera integral la información académica y administrati
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
 | Clavetel | INT | - | PK, NN| ID del número de Teléfono |
-| Telefono | INT | - |NN | Número de teléfono del alumno |
 | Matricula | NVARCHAR | 20 | FK, NN | Número de matricula del alumno |
+| Telefono | INT | - |NN | Número de teléfono del alumno |
+
 
 ----
 
@@ -153,8 +153,8 @@ El sistema gestiona de manera integral la información académica y administrati
 | :--- | :---: | :--- |
 |Alumno -> Credeciales|1:1|Un alumno tiene una sola credencial vigente.|
 |Telefono -> Alumno  |N:1|Un alumno puede tener varios números de teléfono.|
-|Alumno -> Curso|1:N|Un alumno puede estar inscrito en varios cursos.|
-|Materia ->Curso |1:N| Una materia puede ser impartida en varios cursos (instancias de inscripción).|
+|Alumno -> Cursa|1:N|Un alumno puede estar inscrito en varios cursos.|
+|Materia ->Cursa |1:N| Una materia puede ser impartida en varios cursos (instancias de inscripción).|
 |Materia -> Profesor|N:1|Una materia es impartida por un profesor responsable.|
 |Profesor -> Departamento|N:1|Un profesor pertenece a un único departamento.|
 |Profesor -> Dependiente|1:N|Un profesor puede tener varios dependientes.|
@@ -192,4 +192,4 @@ El sistema gestiona de manera integral la información académica y administrati
 
 9. Diagrama relacional    
 
-![Eje7](/image/Relacional/EjerciTab7.jpg)
+![Eje7](/image/Relacional/EjercicioTab7%20(1).jpg)

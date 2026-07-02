@@ -65,7 +65,7 @@ El sistema administra la estructura organizacional de la empresa, incluyendo emp
 
 | Campos | Tipos | Longitud | Restricciones | Descripción |
 | :--- | :--- | :--- | :--- | :--- |
-| Number | INT | - | PK, NN | Número del proyecto |
+| NumberProj | INT | - | PK, NN | Número del proyecto |
 | Name | NVARCHAR | 30 | NN | Nombre del proyecto |
 | Location | NVARCHAR | 30 | NN | Dirección del proyecto |
 | NumberDep | INT | - | FK, NN | Identificador del departamento |
@@ -120,7 +120,7 @@ El sistema administra la estructura organizacional de la empresa, incluyendo emp
 | Departament | Manages | Employee (Ssn) |
 | Project | NumberDep | Departament (NumberDep) |
 | Work On | Ssn | Employee (Ssn) |
-| Work On | NumberProy | Proyect (Number) |
+| Work On | NumberProj | Proyect (NumberProj) |
 | Dependet | Ssn | Employee (Ssn) |
 | Location | NumbeDep | Departament(NumbeDep) |
 
@@ -143,4 +143,4 @@ El sistema administra la estructura organizacional de la empresa, incluyendo emp
 
 9. Diagrama relacional    
 
-[Eje6](/image/Relacional/EjecicioTab6.jpg)
+![Eje6](/image/Relacional/EjercicioTab6.jpg)
